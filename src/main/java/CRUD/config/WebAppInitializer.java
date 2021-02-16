@@ -1,7 +1,5 @@
 package CRUD.config;
 
-import CRUD.config.RootConfig;
-import CRUD.config.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {

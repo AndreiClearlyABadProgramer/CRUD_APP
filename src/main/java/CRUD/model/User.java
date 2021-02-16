@@ -1,7 +1,5 @@
 package CRUD.model;
 
-import org.springframework.context.annotation.ComponentScan;
-
 import javax.persistence.*;
 
 @Entity
@@ -16,7 +14,7 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "last name")
+    @Column(name = "lastName")
     private String lastName;
 
     @Column(name = "age")

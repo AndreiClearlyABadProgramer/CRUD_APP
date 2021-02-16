@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,27 +24,29 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public void deleteUser(User user) {
-        entityManager.remove(user);
-    }
-
-    @Override
-    public void updateUser(long id, User user) {
-        User user1 = user;
-        user1.setId(id);
-        entityManager.merge(user1);
-    }
-
-    @Override
-    public void deleteUserById(long id) {
+    public void deleteUser(Long id) {
         User user = entityManager.find(User.class, id);
         entityManager.remove(user);
     }
 
     @Override
+    public void updateUser(User user) {
+        entityManager.merge(user);
+    }
+
+    @Override
     public List<User> userList() {
-        List<User> users;
-        users = entityManager.createQuery("select id, name, lastName, age from User").getResultList();
-        return users;
+        try {
+            List<User> users = entityManager.createQuery("select user from User user").getResultList();
+            return users;
+        }catch (NullPointerException e) {
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public User getUserById(long id) {
+        User user = entityManager.find(User.class, id);
+        return user;
     }
 }
