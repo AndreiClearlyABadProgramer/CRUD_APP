@@ -1,49 +1,51 @@
 package CRUD.Controller;
 
+import CRUD.dao.UserDao;
 import CRUD.model.User;
-import CRUD.service.UserService;
-import CRUD.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 public class UserController {
 
-    private UserService service = new UserServiceImpl();
+    @Autowired
+    private final UserDao dao;
+
+    public UserController(UserDao dao) {
+        this.dao = dao;
+    }
+
 
     @GetMapping(value = "/Users")
     public String User(Model model){
         model.addAttribute("user", new User());
-        model.addAttribute("userList", service.userList());
+        model.addAttribute("userList", dao.userList());
         return "Users";
     }
 
-    @PostMapping()
+    @PostMapping(value = "/Users")
     public String create(@ModelAttribute("user") User user){
-        if(user.getId() == null) {
-            service.addUser(user);
-        } else {
-            service.updateUser(user);
-        }
+        dao.addUser(user);
         return "redirect:/Users";
     }
 
-    @RequestMapping("/Remove/{id}")
+    @GetMapping(value = "/Remove/{id}")
     public String remove(@PathVariable("id") long id){
-        service.deleteUser(id);
+        dao.deleteUser(id);
         return "redirect:/Users";
     }
 
-    @RequestMapping("/Edit/{id}")
+    @GetMapping(value = "/{id}/Edit")
     public String edit(@PathVariable("id") long id, Model model){
-        model.addAttribute("user", service.getUserById(id));
-        model.addAttribute("userList", service.userList());
+        model.addAttribute("User", dao.getUserById(id));
+        return "Edit";
+    }
+
+    @PatchMapping("/{id}/Edit")
+    public String update(@ModelAttribute("User") User user, @PathVariable("id") long id){
+        dao.updateUser(id, user);
         return "redirect:/Users";
     }
 }

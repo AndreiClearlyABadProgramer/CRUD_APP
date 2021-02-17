@@ -50,6 +50,10 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:5.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.2.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:2.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.0.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:2.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.12" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="CRUD_APP/web/Web" />

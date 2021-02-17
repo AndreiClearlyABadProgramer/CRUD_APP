@@ -7,6 +7,7 @@
     <title>Users</title>
 </head>
 <body>
+<h1>Users</h1>
 <table border="1">
     <tr>
         <th>id</th>
@@ -16,18 +17,18 @@
         <th>edit</th>
         <th>remove</th>
     </tr>
-    <tr th:each="user: ${userList}">
+    <tr th:each="user, state: ${userList}">
         <td th:utext="${user.id}">id</td>
         <td th:utext="${user.name}">name</td>
         <td th:utext="${user.lastName}">last name</td>
         <td th:utext="${user.age}">age</td>
-        <td><a th:href="@{/Users/Edit/{id}(id=${user.id})}">edit</a></td>
-        <td><a th:href="@{/Users/Remove/{id}(id=${user.id})}">remove</a></td>
+        <td><a th:href="@{/{id}/Edit(id=${user.id})}">edit</a></td>
+        <td><a th:href="@{/Remove/{id}(id=${user.id})}">remove</a></td>
     </tr>
 </table>
 <br/>
-<br/>
-<form method="post" th:action="@{/Users}" th:method="POST" th:object="${user}">
+<h1>Add user</h1>
+<form th:action="@{/Users}" th:method="POST" th:object="${user}">
     <label for="name">Enter name:</label>
     <input type="text" th:field="*{name}" id="name"/>
     <br/>
@@ -37,8 +38,7 @@
     <label for="age">Enter age:</label>
     <input type="number" th:field="*{age}" id="age"/>
     <br/>
-    <input type="submit" value="Create"/>
+    <input type="submit" value="Add"/>
 </form>
-
 </body>
 </html>
