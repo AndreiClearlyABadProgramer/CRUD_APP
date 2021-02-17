@@ -45,7 +45,7 @@ public class UserController {
 
     @PatchMapping("/{id}/Edit")
     public String update(@ModelAttribute("User") User user, @PathVariable("id") long id){
-        dao.updateUser(id, user);
+        dao.updateUser(user);
         return "redirect:/Users";
     }
 }
